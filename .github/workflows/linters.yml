@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+  
+>>>>>>> feature
 name: Linters
 
 on: pull_request
