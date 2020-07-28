@@ -68,3 +68,33 @@ describe "vigenere_cipher" do
         expect(vigenere_cipher("yawn", [5, 1]) ).to eq("dbbo")
     end
 end
+
+
+ describe "vowel_rotate" do
+    it "The first vowel of the string should be replaced with the last vowel"   do
+        expect(vowel_rotate('computer') ).to eq("cempotur")     # => "cempotur"
+        expect(vowel_rotate('oranges') ).to eq("erongas")      # => "erongas"
+        expect(vowel_rotate('headphones')).to eq("heedphanos")    # => "heedphanos"
+        expect(vowel_rotate('bootcamp')).to eq("baotcomp")      # => "baotcomp"
+        expect(vowel_rotate('awesome')).to eq("ewasemo")       # => "ewasemo"
+    end
+ end
+
+ describe 'String' do
+
+    describe '#select' do
+            let(:str_a){ "app academy"}
+            let(:str_b){ "HELLOworld"}
+        context "When no block is given" do
+            it "should return an epty string" do
+            expect(str_a.select).to eq("") 
+            end
+        end
+
+        it "select elements that return true in the block" do
+            expect(str_a.select{ |ch| !"aeiou".include?(ch) }).to eq("pp cdmy")   
+            expect(str_b.select{ |ch| ch == ch.upcase }).to eq("HELLO")   
+        end
+    end
+
+ end

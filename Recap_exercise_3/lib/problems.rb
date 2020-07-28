@@ -58,9 +58,7 @@ end
 def prime?(num)
     return false if num < 1
     return true if num == 2
-    (2...num).each do |n|
-       return false if num % n == 0
-    end
+    (2...num).each {|n| return false if num % n == 0}
     true
 end
 
@@ -81,4 +79,75 @@ end
 
 
 def vowel_rotate(str)
+vowels = "aeiou"
+vinstr = []
+  str.each_char {|ch|  vinstr << ch if vowels.include?(ch)}
+ar = vinstr.pop 
+vinstr.unshift(ar)
+array = []
+str.each_char { |char|  vowels.include?(char) ? array << vinstr.shift : array<<char }
+array.join
 end
+
+
+class String
+  def select(&blc)
+    return "" if blc == nil
+   str = ""
+    self.each_char { |char|  str+=char if blc.call(char)}
+    str
+  end
+  
+
+  def map!(&blc)
+    return "" if blc == nil
+   
+  self.each_char.with_index do |char,indx|
+     self[indx] =  blc.call(char,indx||=nil)
+  end
+
+  end
+end
+
+
+
+word_1 = "Lovelace"
+word_1.map!
+ word_1.map! do |ch| 
+    if ch == 'e'
+        '3'
+    elsif ch == 'a'
+        '4'
+    else
+        ch
+    end
+end
+
+
+#Recursion
+def multiply(a, b)
+  return 0 if b == 0
+ b < 0 ?  -(a + multiply(a, (-b)-1)) : a + multiply(a, b-1)
+end  
+
+
+def lucas_sequence(n)
+  return [] if n == 0
+  return [2] if n == 1
+  return [2,1] if n == 2
+ s = lucas_sequence(n-1)
+ nexts = s[-1]+s[-2]
+ s << nexts
+ s
+end
+
+def prime_factorization(num)
+    (2...num).each do |fact|
+      if num % fact == 0
+        altfact = num / fact
+        return [ *prime_factorization(fact), *prime_factorization(altfact) ]
+      end
+    end
+  [ num ]
+end
+
